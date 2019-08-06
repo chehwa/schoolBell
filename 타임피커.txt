@@ -1,0 +1,51 @@
+import android.os.Build;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TimePicker;
+import java.util.Calendar;
+
+public class MainActivity extends AppCompatActivity {
+
+    TimePicker mTimePicker;
+    Button btn;
+    Calendar mCalendar = Calendar.getInstance();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        mTimePicker = (TimePicker)findViewById(R.id.timePicker);
+        mTimePicker.setIs24HourView(true);
+        btn = (Button)findViewById(R.id.btn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                int hour, min;
+
+                if(Build.VERSION.SDK_INT >= 23) {
+                    hour = mTimePicker.getHour();
+                    min = mTimePicker.getMinute();
+                } else {
+                    hour = mTimePicker.getCurrentHour();
+                    min = mTimePicker.getCurrentMinute();
+                }
+            }
+        });
+    }
+}
+
+
+
+
+
+<Button
+    android:id = "@+id/btn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+</Button>
+<TimePicker
+    android:id="@+id/timePicker"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+</TimePicker>
